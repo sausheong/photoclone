@@ -1,0 +1,38 @@
+=snippet :'/snippets/top'
+=snippet :'/snippets/album_inline_js'
+.span-24
+  .span-2
+    %img.span-2{:src => "#{@album.user.photo_url}"}
+  .span-20.last
+    %h2.edit_name{:style => 'margin-bottom: 0;'} #{@album.name}
+    %h4.edit_area #{@album.description}
+
+%hr.space
+
+.span-24
+  %h3
+    %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
+    %a{:href => "/albums"} [Back to albums]    
+%hr.space
+
+.span-24
+  %h3 Photos in this album            
+  - if @album.original_photos(@user).empty?
+    %h4 
+      There are no photos in this album.
+      %a{:href => "/album/#{@album.id}/upload"} Upload some photos?
+      
+  -@album.original_photos(@user).each  do |photo|
+    -   
+    %a{:href => "/photo/#{photo.id}"}
+      %img{:src => "#{photo.url_thumbnail}"}
+
+
+  %hr.space
+  
+  %h3 Edited versions of photos in this album
+  - if @album.edited_photos(@user).empty?
+    %h4 There are no edited versions of photos in this album
+  -@album.edited_photos(@user).each  do |photo|
+    %a{:href => "/photo/#{photo.id}"}
+      %img{:src => "#{photo.url_thumbnail}"}  

@@ -1,0 +1,29 @@
+=snippet :'/snippets/top'
+-if flash[:error]
+  .span-14.prepend-2.last
+    .error 
+      =flash[:error]
+
+.span-24.last
+  %h2.comic Please provide some information for your new account. Put in at least a nickname, else we'll generate one for you! (you can change it later though)
+%form{:method => 'post', :action => '/save_profile' }
+  .span-5 
+    A nickname for your account
+  .span-18.last
+    %input{:type => 'text', :name => 'nickname'}
+  .span-5
+    Your name
+  .span-18.last
+    %input.span-12{:type => 'text', :name => 'formatted_name'}
+  .span-5
+    Where are you?
+  .span-18.last
+    %input.span-12{:type => 'text', :name => 'location'}
+  .span-5
+    Brief description of yourself
+  .span-18.last
+    %textarea{:rows => 3, :name => 'description'}
+
+  %hr.space
+
+  %input{:type => 'submit', :value => 'save'}

@@ -1,0 +1,45 @@
+=snippet :'/snippets/top'
+.span-24
+  .span-2
+    %img.span-2{:src => "#{@user.photo_url}"}
+  .span-8
+    %h2{:style => 'margin-bottom: 0;'} Contacts
+    %h3 Finding friends to share photos!
+  .span-8.prepend-5
+    %form{:method => 'get'}
+      %input{:type => 'text', :name => 'query'}
+      %input{:type => 'submit', :value => 'search people'}
+
+- if @search_results
+  .span-24
+    %h3 People who match your search criteria
+    - @search_results.each do |res|
+      .span-4
+        %img.span-2{:src => "#{res.photo_url}"}
+        %h4{:style => 'margin-bottom:5px;'} #{res.formatted_name}
+        %hr.space
+
+      .span-3.pull-2
+        - unless res == @user
+          %form{:id => "form_create_#{res.id}", :method => 'post', :action => "/contact/#{res.id}"} 
+            %input{:type => 'hidden', :name => '_method', :value => 'put'}
+            %a{:href => '#', :onclick => '$("#form_create_' + "#{res.id}" + '").submit();'} [add as friend]
+          %a{:href => "/albums/#{res.id}"} [albums]
+        - else
+          This is me!
+      
+.span-24
+  %h3 My contacts
+  -@contacts.each do |contact|
+    .span-24
+      .span-4
+        %img.span-2{:src => "#{contact.photo_url}"}
+        %h4{:style => 'margin-bottom:5px;'} 
+          %a{:href => "/contact/#{contact.id}"} #{contact.formatted_name}
+        %hr.space
+
+      .span-3.pull-2
+        %form{:id => "form_delete_#{contact.id}", :method => 'post', :action => "/contact/#{contact.id}"} 
+          %input{:type => 'hidden', :name => '_method', :value => 'delete'}
+          %a{:href => '#', :onclick => '$("#form_delete_' + "#{contact.id}" + '").submit();'} [remove friend]
+        %a{:href => ''} [albums]

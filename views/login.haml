@@ -1,0 +1,19 @@
+.span-24
+  .span-11
+    %img.span-11{:src => '/images/login_logo.gif'}
+    .span-9.prepend-2
+      %h2{:style => 'margin-top:0; padding-top: 0;'} Sharing photos, finding friends
+  .span-2.prepend-10
+    %a.rpxnow{:onclick => "return false;", :href => "https://photoclone.rpxnow.com/openid/v2/signin?token_url=#{@token}" } 
+      %h3 Sign In
+
+  -if flash[:error]
+    .span-24
+      .error 
+        = flash[:error]
+  %img{:src => "#{Photo.random}"} 
+      
+%script{:src => "https://rpxnow.com/openid/v2/widget", :type => "text/javascript"}
+%script{:type => "text/javascript"}
+  RPXNOW.overlay = true;
+  RPXNOW.language_preference = 'en';

@@ -1,0 +1,8 @@
+%script{:type => "text/javascript", :src  => "/js/pixlr_minified.js"}
+:javascript
+  pixlr.settings.target = 'http://localhost:4567/photo/save_edited/#{@photo.id}';
+  pixlr.settings.exit = "http://localhost:4567/photo/#{@photo.id}";
+  pixlr.settings.credentials = true;
+  pixlr.settings.method = 'post';
+  pixlr.settings.locktarget = true;
+  
