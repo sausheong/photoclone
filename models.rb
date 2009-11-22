@@ -1,4 +1,4 @@
-%w(dm-core dm-timestamps dm-validations rmagick right_aws config).each  { |lib| require lib}
+%w(dm-core dm-timestamps dm-validations RMagick right_aws config).each  { |lib| require lib}
 include Magick
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://root:root@localhost/photoclone')
 S3 = RightAws::S3Interface.new(S3_CONFIG['AWS_ACCESS_KEY'], S3_CONFIG['AWS_SECRET_KEY'], {:multi_thread => true} )
