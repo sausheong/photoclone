@@ -1,4 +1,4 @@
-%w(rubygems sinatra digest/md5 rack-flash json restclient models hello haml rmagick).each  { |lib| require lib}
+%w(rubygems sinatra digest/md5 rack-flash models hello haml rmagick).each  { |lib| require lib}
 set :sessions, true
 set :show_exceptions, false
 use Rack::Flash
