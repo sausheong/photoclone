@@ -11,7 +11,7 @@
       .span-4
         %a{:href => '#', :id => 'add_annotation' } [annotate photo]
       .span-3
-        %a{:href => '#', :onclick => "pixlr.open({image:'http://localhost:4567/photos/#{@photo.id}.tmp', title:'#{@photo.title} copy', service:'express'});"} [edit photo]
+        %a{:href => '#', :onclick => "pixlr.open({image:'http://photoclone.saush.com/photos/#{@photo.id}.tmp', title:'#{@photo.title} copy', service:'express'});"} [edit photo]
       .span-4
         %form{:id => "form_cover_photo", :method => 'post', :action => "/album/cover/#{@photo.id}"} 
           %a{:href => '#', :onclick => '$("#form_cover_photo").submit();'} [set album cover]
