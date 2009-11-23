@@ -15,18 +15,15 @@
   .span-24
     %h3 People who match your search criteria
     - @search_results.each do |res|
-      .span-4
-        %img.span-2{:src => "#{res.photo_url}"}
-        %h4{:style => 'margin-bottom:5px;'} #{res.formatted_name}
-        %hr.space
-
-      .span-3.pull-2
+      .span-3
+        %a{:href => "/albums/#{res.id}"}
+          %img.span-2{:src => "#{res.photo_url}"}
+          %h4{:style => 'margin-bottom:5px;'} #{res.formatted_name}
         - unless res == @user or @user.follows.include? res
           %form{:id => "form_create_#{res.id}", :method => 'post', :action => "/follow/#{res.id}"} 
             %input{:type => 'hidden', :name => '_method', :value => 'put'}
             %a{:href => '#', :onclick => '$("#form_create_' + "#{res.id}" + '").submit();'} [follow]
-          %a{:href => "/albums/#{res.id}"} [albums]
-
+        %hr.space
 
 %hr.space      
 .span-24
@@ -36,14 +33,25 @@
   - else
     .span-24 
       -@follows.each do |follow|
-        .span-4
-          %img.span-2{:src => "#{follow.photo_url}"}
-          %h4{:style => 'margin-bottom:5px;'} 
-            %a{:href => "/follow/#{follow.id}"} #{follow.formatted_name}
-          %hr.space
-
-        .span-3.pull-2
+        .span-3
+          %a{:href => "/albums/#{follow.id}"}
+            %img.span-2{:src => "#{follow.photo_url}"}
+            %h4{:style => 'margin-bottom:5px;'} #{follow.formatted_name}
           %form{:id => "form_delete_#{follow.id}", :method => 'post', :action => "/follow/#{follow.id}"} 
             %input{:type => 'hidden', :name => '_method', :value => 'delete'}
             %a{:href => '#', :onclick => '$("#form_delete_' + "#{follow.id}" + '").submit();'} [unfollow]
-          %a{:href => "/albums/#{follow.id}"} [albums]                                                                 
+          %hr.space
+
+%hr.space      
+.span-24
+  %h3 People following you
+  - if @followers.empty?
+    %h4 No one is following you at the moment. Tell them about it!
+  - else
+    .span-24 
+      -@followers.each do |follower|
+        .span-3
+          %a{:href => "/albums/#{follower.id}"}
+            %img.span-2{:src => "#{follower.photo_url}"}
+            %h4{:style => 'margin-bottom:5px;'} #{follower.formatted_name}
+          %hr.space

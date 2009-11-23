@@ -226,6 +226,7 @@ end
 get "/follows" do
   @user = User.get session[:userid]
   @follows = @user.follows
+  @followers = @user.followers
   if params[:query]
     @search_results = User.all(:nickname.like => params[:query] + '%', :limit => 10)
   end
