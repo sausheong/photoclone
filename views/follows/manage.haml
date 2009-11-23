@@ -34,8 +34,8 @@
   - if @follows.empty?
     %h4 You are not following anyone right now. Search for someone and follow them to view their photos!
   - else
-    -@follows.each do |follow|
-      .span-24
+    .span-24 
+      -@follows.each do |follow|
         .span-4
           %img.span-2{:src => "#{follow.photo_url}"}
           %h4{:style => 'margin-bottom:5px;'} 
