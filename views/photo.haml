@@ -85,19 +85,21 @@
       %a{:href => "/photo/#{@prev_in_album.id}"}
         %img.span-3{:src => "#{@prev_in_album.url_thumbnail}"}
     - else
-      %img.span-3{:src => '/images/spacer.gif'}
+        %img.span-3{:src => '/images/spacer.gif'}
     - if @next_in_album
       %a{:href => "/photo/#{@next_in_album.id}"}
         %img.span-3{:src => "#{@next_in_album.url_thumbnail}"}       
     - else
       %img.span-3{:src => '/images/spacer.gif'}
-    %br
-    %a{:href => "/photo/#{@prev_in_album.id}"}
-      %img.span-2{:src => "/images/left_arrow.gif"}
+    %br                
+    - if @prev_in_album
+      %a{:href => "/photo/#{@prev_in_album.id}"}
+        %img.span-2{:src => "/images/left_arrow.gif"}
     %a{:href => "/album/#{@photo.album.id}"}
       %img.span-2{:src => "/images/browse.gif"}              
-    %a{:href => "/photo/#{@next_in_album.id}"}
-      %img.span-2{:src => "/images/right_arrow.gif"} 
+    - if @next_in_album
+      %a{:href => "/photo/#{@next_in_album.id}"}
+        %img.span-2{:src => "/images/right_arrow.gif"} 
 
 %hr.space
   
