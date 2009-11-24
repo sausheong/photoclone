@@ -228,7 +228,7 @@ get "/follows" do
   @follows = @user.follows
   @followers = @user.followers
   if params[:query]
-    @search_results = User.all(:nickname.like => params[:query] + '%', :limit => 10)
+    @search_results = User.all(:nickname.like => params[:query] + '%')
   end
   haml :'follows/manage'
 end  
