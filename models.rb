@@ -74,7 +74,7 @@ class Album
   end
 
   def edited_photos(viewer)
-    criteria = {::photo_id.not => nil, :order => [:created_at.desc]}
+    criteria = {:photo_id.not => nil, :order => [:created_at.desc]}
     criteria[:privacy] = 'public' if viewer != user
     photos(criteria)
   end
