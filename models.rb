@@ -68,23 +68,23 @@ class Album
   belongs_to :cover_photo, :class_name => 'Photo', :child_key => [:cover_photo_id]
   
   def original_photos(viewer)
-    criteria = {:original_photo_id => nil, :order => [:created_at.desc]}
+    criteria = {:photo_id => nil, :order => [:created_at.desc]}
     criteria[:privacy] = 'public' if viewer != user
     photos(criteria)
   end
 
   def edited_photos(viewer)
-    criteria = {:original_photo_id.not => nil, :order => [:created_at.desc]}
+    criteria = {::photo_id.not => nil, :order => [:created_at.desc]}
     criteria[:privacy] = 'public' if viewer != user
     photos(criteria)
   end
 
   def public_photos
-     photos(:original_photo_id => nil, :order => [:created_at.desc], :privacy => 'public')
+     photos(:photo_id => nil, :order => [:created_at.desc], :privacy => 'public')
   end
 
   def private_photos
-     photos(:original_photo_id => nil, :order => [:created_at.desc], :privacy => 'private')
+     photos(:photo_id => nil, :order => [:created_at.desc], :privacy => 'private')
   end
   
 end
@@ -101,7 +101,7 @@ class Photo
   property :created_at, DateTime
   
   belongs_to :album
-  belongs_to :original, :class_name => 'Photo', :child_key => [:original_photo_id]
+  belongs_to :original, :class_name => 'Photo', :child_key => [:photo_id]
   
   has n, :annotations
   has n, :comments
