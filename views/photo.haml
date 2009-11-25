@@ -47,8 +47,11 @@
           %input{:type => 'button', :value => 'cancel', :id => 'cancel_note'}
   .span-10
     %img.span-1{:src => "#{@photo.album.user.photo_url}"}  
-    Uploaded on #{@photo.created_at.strftime("%d %b %Y")} by 
-    %a{:href => "/follow/#{@photo.album.user.id}"} #{@photo.album.user.formatted_name}
+    Uploaded on #{@photo.created_at.strftime("%d %b %Y")} by
+    %form{:id => "form_create_#{@photo.album.user.id}", :method => 'post', :action => "/follow/#{@photo.album.user.id}"} 
+      %input{:type => 'hidden', :name => '_method', :value => 'put'}
+      %a{:href => '#', :onclick => '$("#form_create_' + "#{@photo.album.user.id}" + '").submit();'} 
+        =@photo.album.user.formatted_name
     %h4 
       This photo is
       - if @user === @photo.album.user

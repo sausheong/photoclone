@@ -142,12 +142,14 @@ class Photo
   def previous_in_album(viewer)    
     photos = viewer == album.user ? album.original_photos(viewer) : album.public_photos       
     index = photos.index self
+    return nil unless index
     photos[index - 1] if index > 0
   end
 
   def next_in_album(viewer)
     photos = viewer == album.user ? album.original_photos(viewer) : album.public_photos
     index = photos.index self
+    return nil unless index
     photos[index + 1] if index < album.photos.length 
   end              
 
