@@ -131,11 +131,13 @@ class Photo
   end
   
   def url_thumbnail
-    S3.get_link(s3_bucket, filename_thumbnail)
+    #S3.get_link(s3_bucket, filename_thumbnail)
+    create_thumbnail_tmp_from_s3
+    "/photos/#{id}.thm"    
   end
 
   def url_display
-    create_tmp_from_s3
+    create_display_tmp_from_s3
     "/photos/#{id}.tmp"
   end  
   
@@ -196,8 +198,18 @@ class Photo
     S3.delete s3_bucket, filename_display
     S3.delete s3_bucket, filename_thumbnail
   end
+
+  def create_thumbnail_tmp_from_s3
+    thm_tmp = File.dirname(__FILE__) + "/public/photos/#{id}.thm"
+    return if File.exists? thm_tmp
+    File.open(thm_tmp, 'w+') do |file|
+      S3.get(s3_bucket, filename_thumbnail) do |chunk|
+        file.write chunk
+      end
+    end
+  end
   
-  def create_tmp_from_s3
+  def create_display_tmp_from_s3
     display_tmp = File.dirname(__FILE__) + "/public/photos/#{id}.tmp"
     return if File.exists? display_tmp
     File.open(display_tmp, 'w+') do |file|
