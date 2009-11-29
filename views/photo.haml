@@ -54,7 +54,7 @@
         %a{:href => '#', :onclick => '$("#form_create_' + "#{@photo.album.user.id}" + '").submit();'} 
           =@photo.album.user.formatted_name
     - else
-       =@photo.album.user.formatted_name
+      =@photo.album.user.formatted_name
     %h4 
       This photo is
       - if @user === @photo.album.user
