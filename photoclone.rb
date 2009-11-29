@@ -161,12 +161,14 @@ end
 
 
 # upload photos
-get "/upload" do
+get "/upload" do 
+  @user = User.get(params[:user_id])
   @albums = User.get(session[:userid]).albums
   haml :upload
 end
 
 get "/album/:id/upload" do
+  @user = User.get(params[:user_id])
   @albums = [Album.get(params[:id])]
   haml :upload  
 end
