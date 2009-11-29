@@ -6,7 +6,6 @@ include Magick
 
 get "/" do
   if session[:userid].nil? then 
-    @token = "http://#{env["HTTP_HOST"]}/after_login"
     haml :login 
   else
     @user = User.get(session[:userid])
@@ -256,6 +255,10 @@ delete "/photo/:id" do
   album = photo.album
   photo.destroy
   redirect "/album/#{album.id}"
+end
+
+before do
+  @token = "http://#{env["HTTP_HOST"]}/after_login"
 end
 
 load "helpers.rb"
