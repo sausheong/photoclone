@@ -13,15 +13,13 @@
   %h2{:style => 'margin-bottom: 0;'} Your recent photostream
   %h3 Some of your latest uploads
   -unless @user.albums.empty? 
-    -@user.albums.photos(:original_photo_id => nil, :order => [:created_at.desc])[0..10].each  do |photo|
+    -@user.albums.photos(:photo_id => nil, :order => [:created_at.desc])[0..10].each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
         %img{:src => "#{photo.url_thumbnail}"}
-
-
 
   %h2{:style => 'margin-bottom: 0;'} People you follow
   %h3 Photos shared by people you follow
   - unless @user.follows.empty? and @user.follows.albums.empty?
-    - @user.follows.albums.photos(:original_photo_id.not => nil, :order => [:created_at.desc], :privacy => 'public')[0..10].each  do |photo|
+    - @user.follows.albums.photos(:photo_id.not => nil, :order => [:created_at.desc], :privacy => 'public')[0..10].each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
         %img{:src => "#{photo.url_thumbnail}"}
