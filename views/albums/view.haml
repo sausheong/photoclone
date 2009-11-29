@@ -13,7 +13,7 @@
     %h3
       - if @user == @myself
         %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
-      %a{:href => "/albums"} [Back to albums]    
+      %a{:href => "/albums/#{@album.user.id}"} [Back to albums]    
   %hr.space
 
 .span-24
