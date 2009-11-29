@@ -18,7 +18,7 @@
       .span-3.picbox
         %a{:href => "/albums/#{res.id}"}
           %img.span-2{:src => "#{res.photo_url}"}
-          %h4{:style => 'margin-bottom:5px;'} #{res.formatted_name}
+          %h4{:style => 'margin-bottom:5px;'} #{res.nickname}
         - unless res == @user or @user.follows.include? res
           %form{:id => "form_create_#{res.id}", :method => 'post', :action => "/follow/#{res.id}"} 
             %input{:type => 'hidden', :name => '_method', :value => 'put'}
@@ -36,7 +36,7 @@
         .span-3.picbox
           %a{:href => "/albums/#{follow.id}"}
             %img.span-2{:src => "#{follow.photo_url}"}
-            %h4{:style => 'margin-bottom:5px;'} #{follow.formatted_name}
+            %h4{:style => 'margin-bottom:5px;'} #{follow.nickname}
           %form{:id => "form_delete_#{follow.id}", :method => 'post', :action => "/follow/#{follow.id}"} 
             %input{:type => 'hidden', :name => '_method', :value => 'delete'}
             %a{:href => '#', :onclick => '$("#form_delete_' + "#{follow.id}" + '").submit();'} [unfollow]
