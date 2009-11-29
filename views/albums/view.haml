@@ -8,12 +8,12 @@
     %h4.edit_area #{@album.description}
 
 %hr.space
-
-.span-24
-  %h3
-    %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
-    %a{:href => "/albums"} [Back to albums]    
-%hr.space
+- if @user
+  .span-24
+    %h3
+      %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
+      %a{:href => "/albums"} [Back to albums]    
+  %hr.space
 
 .span-24
   %h3 Photos in this album            
@@ -23,7 +23,6 @@
       %a{:href => "/album/#{@album.id}/upload"} Upload some photos?
       
   -@album.original_photos(@user).each  do |photo|
-    -   
     %a{:href => "/photo/#{photo.id}"}
       %img{:src => "#{photo.url_thumbnail}"}
 
