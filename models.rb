@@ -109,29 +109,16 @@ class Photo
   
   after :save, :save_image_s3
   after :destroy, :destroy_image_s3
-  
-  def public?
-    privacy == 'public'
-  end
 
-  def private?
-    privacy == 'private'
-  end
   
-  def filename_original
-    "#{id}.orig"
-  end
+  def filename_original "#{id}.orig"; end 
+  def filename_display "#{id}.disp"; end  
+  def filename_thumbnail "#{id}.thmb"; end
   
-  def filename_display
-    "#{id}.disp"
-  end
-    
-  def filename_thumbnail
-    "#{id}.thmb"
-  end
-  
+  def s3_url_thumbnail S3.get_link(s3_bucket, filename_thumbnail); end 
+  def s3_url_display S3.get_link(s3_bucket, filename_display); end
+
   def url_thumbnail
-    #S3.get_link(s3_bucket, filename_thumbnail)
     create_thumbnail_tmp_from_s3
     "/photos/#{id}.thm"    
   end
@@ -176,7 +163,6 @@ class Photo
     length = t.rows > t.columns ? t.columns : t.rows
     thumbnail =  t.crop(CenterGravity, length, length)
     thumbnail.write(File.dirname(__FILE__) + '/public/photos/' + filename_thumbnail)    
-
   end
 
   def save_image_s3

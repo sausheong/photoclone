@@ -69,9 +69,18 @@ get "/albums/:user_id" do
   haml :"albums/manage"
 end
 
+# url to the user's albums
+get "/user/:username" do
+  @myself = User.get(session[:userid])
+  @user = User.first(:nickname => params[:username])
+  redirect "/" if @user.nil?
+  haml :"albums/manage"  
+end
+
+
 # add album
 get "/album/add" do 
-  @user = User.get(params[:user_id])
+  @user = User.get(session[:userid])
   haml :"/albums/add"
 end
 
