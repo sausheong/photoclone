@@ -42,7 +42,10 @@ get "/profile" do
   haml :profile
 end
 
-get "/change_profile" do  haml :change_profile end
+get "/change_profile" do  
+  @user = User.get(params[:user_id])
+  haml :change_profile 
+end
 
 post "/save_profile" do
   user = User.get(session[:userid])
@@ -67,7 +70,8 @@ get "/albums/:user_id" do
 end
 
 # add album
-get "/album/add" do
+get "/album/add" do 
+  @user = User.get(params[:user_id])
   haml :"/albums/add"
 end
 
