@@ -111,12 +111,12 @@ class Photo
   after :destroy, :destroy_image_s3
 
   
-  def filename_original "#{id}.orig"; end 
-  def filename_display "#{id}.disp"; end  
-  def filename_thumbnail "#{id}.thmb"; end
+  def filename_original; "#{id}.orig"; end 
+  def filename_display; "#{id}.disp"; end  
+  def filename_thumbnail; "#{id}.thmb"; end
   
-  def s3_url_thumbnail S3.get_link(s3_bucket, filename_thumbnail); end 
-  def s3_url_display S3.get_link(s3_bucket, filename_display); end
+  def s3_url_thumbnail; S3.get_link(s3_bucket, filename_thumbnail); end 
+  def s3_url_display; S3.get_link(s3_bucket, filename_display); end
 
   def url_thumbnail
     create_thumbnail_tmp_from_s3
