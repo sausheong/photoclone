@@ -22,4 +22,4 @@
   - unless @user.follows.empty? and @user.follows.albums.empty?
     - @user.follows.albums.photos(:photo_id => nil, :order => [:created_at.desc], :privacy => 'public')[0..22].each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
-        %img.span-2{:src => "#{photo.url_thumbnail}", :alt => "#{photo.title} (#{photo.album.user.nickname})"}
+        %img.span-2{:src => "#{photo.url_thumbnail}", :title => "#{photo.title} (#{photo.album.user.nickname})"}
