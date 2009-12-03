@@ -15,7 +15,7 @@
   -unless @user.albums.empty? 
     -@user.albums.photos(:photo_id => nil, :order => [:created_at.desc])[0..11].each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
-        %img.span-2{:src => "#{photo.url_thumbnail}", :title => "#{photo.title}"}}
+        %img.span-2{:src => "#{photo.url_thumbnail}", :title => "#{photo.title}"}
 
   %h2{:style => 'margin-bottom: 0;'} People you follow
   %h3 Photos shared by people you follow
