@@ -4,8 +4,12 @@
   .span-2
     %img.span-2{:src => "#{@album.user.photo_url}"}
   .span-20.last
-    %h2.edit_name{:style => 'margin-bottom: 0;'} #{@album.name}
-    %h4.edit_area #{@album.description}
+    - if @user == @myself
+      %h2.edit_name{:style => 'margin-bottom: 0;'} #{@album.name}
+      %h4.edit_area #{@album.description}
+    - else
+      %h2{:style => 'margin-bottom: 0;'} #{@album.name}
+      %h4 #{@album.description}      
 
 %hr.space
 - if @user
