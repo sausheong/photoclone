@@ -5,7 +5,7 @@
   .span-9
     %h2{:style => 'margin-bottom: 0;'} #{@user == @myself ? 'Your' : "#{@user.formatted_name}'s"} albums
     %h3 
-      = "You follow #{@user.formatted_name}" if @user != @myself and @myself.follows.include? @user
+      = "You follow #{@user.formatted_name}" if @user != @myself and !@myself.nil? and @myself.follows.include? @user
 %hr.space
 .span-5
   %h3
