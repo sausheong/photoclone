@@ -60,7 +60,7 @@ end
 get "/user/:username" do
   @myself = User.get(session[:userid])
   @viewed_user = User.first(:nickname => params[:username])
-  redirect "/" if @user.nil?
+  redirect "/" if @viewed_user.nil?
   haml :"albums/public"  
 end
 
