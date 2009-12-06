@@ -56,6 +56,14 @@ post "/save_profile" do
   redirect "/"
 end
 
+# url to the user's albums
+get "/user/:username" do
+  @myself = User.get(session[:userid])
+  @viewed_user = User.first(:nickname => params[:username])
+  redirect "/" if @user.nil?
+  haml :"albums/public"  
+end
+
 
 # show all albums belonging to the user
 get "/albums" do
@@ -67,14 +75,6 @@ get "/albums/:user_id" do
   @myself = User.get(session[:userid])
   @user = User.get(params[:user_id])
   haml :"albums/manage"
-end
-
-# url to the user's albums
-get "/user/:username" do
-  @myself = User.get(session[:userid])
-  @user = User.first(:nickname => params[:username])
-  redirect "/" if @user.nil?
-  haml :"albums/manage"  
 end
 
 
