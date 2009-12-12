@@ -18,19 +18,19 @@
       - if @user == @album.user
         %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
       %a{:href => "/albums/#{@album.user.id}"} [Back to albums]    
+
   %hr.space
-- if @user
+
   .span-24
     %h3 Photos in this album            
     - if @album.original_photos(@user).empty?
-      %h4 
-        There are no photos in this album.
+      %h4 There are no photos in this album.
         %a{:href => "/album/#{@album.id}/upload"} Upload some photos?
       
-    -@album.original_photos(@user).each  do |photo|
+    - @album.original_photos(@user).each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
         %img.span-2{:src => "#{photo.url_thumbnail}"}
-        %hr.space
+    %hr.space
 
     %h3 Edited versions of photos in this album
     - if @album.edited_photos(@user).empty?
@@ -38,6 +38,7 @@
     -@album.edited_photos(@user).each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
         %img.span-2{:src => "#{photo.url_thumbnail}"}        
+        
 - else
   -@album.public_photos.each  do |photo|
     %a{:href => "/photo/#{photo.id}"}
