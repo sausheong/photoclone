@@ -38,7 +38,8 @@ post "/after_login" do
 end
 
 get "/profile" do
-  load_users(session[:userid])
+  @myself = User.get(id)
+  @user = @myself
   haml :profile
 end
 
