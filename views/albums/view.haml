@@ -31,7 +31,7 @@
     - @album.original_photos(@user).each  do |photo|
       %a{:href => "/photo/#{photo.id}"}
         %img.span-2{:src => "#{photo.url_thumbnail}"}
-        %hr.space
+    %hr.space
 
     %h3 Edited versions of photos in this album
     - if @album.edited_photos(@user).empty?
