@@ -11,16 +11,15 @@
       %h2{:style => 'margin-bottom: 0;'} #{@album.name}
       %h4 #{@album.description}      
 
+.span-24
+  %h3
+    - if @user == @album.user
+      %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
+    %a{:href => "/albums/#{@album.user.id}"} [Back to albums]    
+
 %hr.space
+
 - if @user
-  .span-24
-    %h3
-      - if @user == @album.user
-        %a{:href => "/album/#{@album.id}/upload"} [Upload photos]
-      %a{:href => "/albums/#{@album.user.id}"} [Back to albums]    
-
-  %hr.space
-
   .span-24
     %h3 Photos in this album            
     - if @album.original_photos(@user).empty?
