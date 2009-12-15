@@ -54,7 +54,7 @@
           %a{:href => "/albums/#{follower.id}"}
             %img.span-2{:src => "#{follower.photo_url}"}
             %h4{:style => 'margin-bottom:5px;'} #{follower.formatted_name}      
-            - unless @user.follows.include? res
+            - unless @user.follows.include? follower
               %form{:id => "form_follower_create_#{follower.id}", :method => 'post', :action => "/follow/#{follower.id}"} 
                 %input{:type => 'hidden', :name => '_method', :value => 'put'}
                 %a{:href => '#', :onclick => '$("#form_follower_create_' + "#{follower.id}" + '").submit();'} [follow]            
